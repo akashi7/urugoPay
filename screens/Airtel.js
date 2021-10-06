@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { TextInput, View, Text, Alert, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -13,6 +13,15 @@ export const Airtel = () => {
   useAnyOrientation();
 
   const Actions = useHistory();
+
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+    })();
+  }, []);
 
   return (
     <>

@@ -1,8 +1,7 @@
 /*eslint-disable*/
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, View, Text, Alert, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { useHistory } from 'react-router-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useAnyOrientation } from '../UseOrientation';
@@ -11,7 +10,7 @@ export const Profile = () => {
   const Actions = useHistory();
   useAnyOrientation();
 
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const [state, setState] = useState({
     password: "",
@@ -21,13 +20,21 @@ export const Profile = () => {
   });
 
 
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+    })();
+  }, []);
+
   const changePassword = async () => {
     const token = await AsyncStorage.getItem('key');
 
     setState({ ...state, loading: true });
 
     try {
-
       const res = await (await fetch(`${url}/user/updatePassword`, {
         method: "PATCH",
         headers: {
@@ -116,10 +123,7 @@ export const Profile = () => {
             : <TouchableOpacity style={styles.LoginButton} onPress={() => changePassword()} >
               <Text style={styles.LoginText} >Send</Text>
             </TouchableOpacity>}
-
         </View>
-
-
       </ScrollView>
     </>
   );

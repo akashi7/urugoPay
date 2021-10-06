@@ -1,4 +1,4 @@
-package com.bpay;
+package com.akashichris;
 
 import com.facebook.react.ReactActivity;
 import android.content.Intent;

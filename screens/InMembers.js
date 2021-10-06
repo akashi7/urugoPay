@@ -10,7 +10,7 @@ export const InMembers = () => {
   const Actions = useHistory();
   useAnyOrientation();
 
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const [state, setState] = useState({
     tel: "",
@@ -56,8 +56,8 @@ export const InMembers = () => {
     <>
       <ScrollView style={styles.scroll}>
         <View style={styles.slogan} >
-          <Text style={styles.sign} >Search</Text>
-          <Text style={styles.Up} >RDAWU member</Text>
+          <Text style={styles.sign} >RDAWU</Text>
+          <Text style={styles.Up} >Member</Text>
         </View>
         <View style={styles.container} >
           <View style={styles.telephone}>

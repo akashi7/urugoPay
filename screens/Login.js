@@ -15,7 +15,7 @@ export const Login = () => {
 
   const Actions = useHistory();
 
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const [state, setState] = useState({
     tel: '',
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    marginTop: 120,
+    marginTop: 90,
     padding: 10
   },
 

@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Alert, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useHistory } from 'react-router-native';
@@ -16,7 +16,7 @@ export const RegisterMaid = () => {
 
 
   const Actions = useHistory();
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const [state, setState] = useState({
     Nid: "",
@@ -26,9 +26,17 @@ export const RegisterMaid = () => {
     loading: false
   });
 
-  const RegisterNewMaid = async () => {
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+    })();
+  }, []);
 
-    console.log("state", state);
+
+  const RegisterNewMaid = async () => {
 
     if ((state.Nid === '') || (!state.names === '') || (!state.phone === '') || (!state.gender === '')) {
       Alert.alert("Error!!", "Please Fill all gaps", [{
@@ -39,9 +47,8 @@ export const RegisterMaid = () => {
     else {
 
       const token = await AsyncStorage.getItem('key');
-
-
       setState({ ...state, loading: true });
+
       try {
 
         const res = await (await fetch(`${url}/user/registerMaid`, {

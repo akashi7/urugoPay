@@ -1,6 +1,6 @@
 /*eslint-disable*/
-import React, { useState } from 'react';
-import { Button, View, Text, Alert, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useHistory } from 'react-router-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,15 +9,26 @@ import { useAnyOrientation } from '../UseOrientation';
 export const Dashboard = () => {
 
   useAnyOrientation();
-
   const Actions = useHistory();
 
-  let url = `http://10.0.2.2:5000`;
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+    })();
+  }, []);
+
+
+
+  let url = `https://urugoserver.herokuapp.com`;
 
   const goLogOut = async () => {
     await AsyncStorage.clear();
-    Actions.push('/');
+    Actions.push('/Login');
   };
+
 
   return (
     <>

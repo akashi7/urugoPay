@@ -14,7 +14,7 @@ export const ViewMaid = () => {
   useAnyOrientation();
 
   const Actions = useHistory();
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const [state, setState] = useState({
     Maid: {
@@ -97,7 +97,14 @@ export const ViewMaid = () => {
 
   useEffect(() => {
     (async () => {
-      await ViewOneMaid();
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+      else {
+        await ViewOneMaid();
+      }
+
     })();
   }, []);
 
@@ -116,7 +123,7 @@ export const ViewMaid = () => {
         {state.loading ? <View style={styles.MaidInfo}>
           <Text>Loading......</Text>
         </View>
-          : state.Maid.oneMaid.map(({ id, maid_phone, maid_names }) => {
+          : state.Maid.oneMaid.map(({ maid_phone, maid_names }) => {
             return (
               <>
                 <View style={styles.MaidInfo} key={generateRandomNumbers()}>

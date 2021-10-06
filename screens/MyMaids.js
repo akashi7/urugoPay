@@ -10,7 +10,7 @@ export const MyMaids = () => {
 
   useAnyOrientation();
 
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const Actions = useHistory();
 
@@ -21,15 +21,9 @@ export const MyMaids = () => {
     loading: false
   });
 
-
-
-
   const clearAll = async () => {
-
     const token = await AsyncStorage.getItem('key');
-
     try {
-
       const res = await (await fetch(`${url}/user/deleteAll`, {
         method: "DELETE",
         headers: {
@@ -69,7 +63,6 @@ export const MyMaids = () => {
 
     setState({ ...state, loading: true });
     try {
-
       const res = await (await fetch(`${url}/user/getAllMyMaids`, {
         method: "GET",
         headers: {
@@ -94,7 +87,13 @@ export const MyMaids = () => {
 
   useEffect(() => {
     (async () => {
-      await fetchMyMaids();
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+      else {
+        await fetchMyMaids();
+      }
     })();
   }, []);
 
@@ -121,9 +120,9 @@ export const MyMaids = () => {
           <Text>Loading wait.......</Text>
         </View>
           : state.allMaids.myMaids.length === 0 ? <View style={styles.container} >
-            <Text style={styles.NO}>You have no employees</Text>
+            <Text style={styles.No}>You have no employees yet</Text>
           </View>
-            : state.allMaids.myMaids.map(({ id, maid_phone, maid_names }) => {
+            : state.allMaids.myMaids.map(({ maid_phone, maid_names }) => {
               return (
                 <>
                   <View style={styles.container} key={generateRandomNumbers()} >

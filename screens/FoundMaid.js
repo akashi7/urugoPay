@@ -12,7 +12,7 @@ export const FoundMaid = () => {
 
 
   const Actions = useHistory();
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
 
   const [state, setState] = useState({
@@ -26,10 +26,8 @@ export const FoundMaid = () => {
 
   const fetchMaid = async () => {
 
-
     const token = await AsyncStorage.getItem('key');
     const MaidTel = await AsyncStorage.getItem('tel');
-
 
     try {
       const res = await (await fetch(`${url}/user/searching?tel=${MaidTel}`, {
@@ -40,11 +38,8 @@ export const FoundMaid = () => {
         }
       })).json();
 
-
       if (res.status === 200) {
-
         setState({ ...state, foundMaid: res.data });
-
       }
 
       else if (res.status === 401) {
@@ -52,17 +47,21 @@ export const FoundMaid = () => {
         Actions.push('/Login');
       }
 
-
     } catch (error) {
       Alert.alert(`Error!`, `Network Error`);
     }
-
-
   };
 
   useEffect(() => {
     (async () => {
-      await fetchMaid();
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+      else {
+        await fetchMaid();
+      }
+
     })();
   }, []);
 

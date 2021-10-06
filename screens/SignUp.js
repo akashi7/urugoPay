@@ -12,7 +12,7 @@ export const SignUp = ({ navigation }) => {
 
   const Actions = useHistory();
 
-  let url = `http://10.0.2.2:6000`;
+  let url = `https://urugoserver.herokuapp.com`;
 
   const [state, setState] = useState({
     tel: '',
@@ -84,7 +84,7 @@ export const SignUp = ({ navigation }) => {
           <View style={styles.telephone}  >
             <Icon name="phone" size={20} color="darkgreen" style={{ padding: 10 }} />
             <TextInput
-              placeholder="tel"
+              placeholder="telephone"
               onChangeText={(inputText) => setState({ ...state, tel: inputText })}
               style={styles.input}
             />
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   container: {
-    marginTop: 50,
+    marginTop: 20,
     padding: 10
   },
   slogan: {

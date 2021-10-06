@@ -1,4 +1,4 @@
-package com.bpay;
+package com.akashichris;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -125,7 +125,6 @@ public class InAppUpdateModule extends ReactContextBaseJavaModule
             e.printStackTrace();
           }
         }
-
       });
     }
   }

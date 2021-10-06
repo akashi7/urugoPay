@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, View, Text, Alert, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useHistory } from 'react-router-native';
@@ -16,7 +16,16 @@ export const SearchMaid = () => {
     loading: false
   });
 
-  let url = `http://10.0.2.2:6000`;
+  useEffect(() => {
+    (async () => {
+      const token = await AsyncStorage.getItem('key');
+      if (!token) {
+        Actions.push('/Login');
+      }
+    })();
+  }, []);
+
+  let url = `https://urugoserver.herokuapp.com`;
 
   const findMaid = async () => {
     const token = await AsyncStorage.getItem('key');

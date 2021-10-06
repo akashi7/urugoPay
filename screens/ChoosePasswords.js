@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React, { useState } from 'react';
-import { TextInput, Button, View, Text, Alert, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { TextInput,View, Text, Alert, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useHistory } from 'react-router-native';
@@ -18,7 +18,8 @@ export const ChoosePasswords = () => {
     loading: false
   });
 
-  let url = `http://10.0.2.2:6000`;
+
+  let url = `https://urugoserver.herokuapp.com`;
 
   const userChoosePassword = async () => {
 

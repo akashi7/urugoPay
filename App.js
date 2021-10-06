@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { NativeRouter, Switch, Route } from 'react-router-native';
+import { NativeRouter, Switch, Route, BackButton } from 'react-router-native';
 import { SplashScreen } from './screens/SplashScreen';
 import { SignUp } from './screens/SignUp';
 import { Login } from './screens/Login';
@@ -41,22 +41,24 @@ const App = () => {
   return (
     <>
       <NativeRouter>
-        <Switch>
-          <Route path="/" component={SplashScreen} exact />
-          <Route path="/SignUp" component={SignUp} exact />
-          <Route path="/Login" component={Login} exact />
-          <Route path="/InMembers" component={InMembers} exact />
-          <Route path="/ChoosePasswords" component={ChoosePasswords} exact />
-          <Route path="/Dashboard" component={Dashboard} exact />
-          <Route path="/MyMaids" component={MyMaids} exact />
-          <Route path="/ViewMaid" component={ViewMaid} exact />
-          <Route path="/MomoPay" component={MoMo} exact />
-          <Route path="/AirtelPay" component={Airtel} exact />
-          <Route path="/Search" component={SearchMaid} exact />
-          <Route path="/FoundMaid" component={FoundMaid} exact />
-          <Route path="/Profile" component={Profile} exact />
-          <Route path="/RegisterMaid" component={RegisterMaid} exact />
-        </Switch>
+        <BackButton>
+          <Switch>
+            <Route path="/" component={SplashScreen} exact />
+            <Route path="/SignUp" component={SignUp} exact />
+            <Route path="/Login" component={Login} exact />
+            <Route path="/InMembers" component={InMembers} exact />
+            <Route path="/ChoosePasswords" component={ChoosePasswords} exact />
+            <Route path="/Dashboard" component={Dashboard} exact />
+            <Route path="/MyMaids" component={MyMaids} exact />
+            <Route path="/ViewMaid" component={ViewMaid} exact />
+            <Route path="/MomoPay" component={MoMo} exact />
+            <Route path="/AirtelPay" component={Airtel} exact />
+            <Route path="/Search" component={SearchMaid} exact />
+            <Route path="/FoundMaid" component={FoundMaid} exact />
+            <Route path="/Profile" component={Profile} exact />
+            <Route path="/RegisterMaid" component={RegisterMaid} exact />
+          </Switch>
+        </BackButton>
       </NativeRouter>
     </>
   );
